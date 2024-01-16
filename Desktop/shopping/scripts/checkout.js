@@ -137,21 +137,27 @@ document.querySelectorAll('.js-update-link')
 
   document.querySelectorAll('.js-save-link')
   .forEach((link) => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', () => {              
       const productId = link.dataset.productId;
-
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
-       container.classList.remove('is-editing-quantity');
-
 
       const quantityInput = document.querySelector(      //code to take the value from input
                                                               
         `.js-quantity-input-${productId}`
       );
       const newQuantity = Number(quantityInput.value);    //should be converted to a number
-      updateQuantity(productId, newQuantity);     
+      if(newQuantity<0||newQuantity>=1000)
+      {
+        alert('Quantity must be at least 0 and less than 1000');
+        return;
+      }
+      
+      updateQuantity(productId, newQuantity);  
+
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`
+      );
+       container.classList.remove('is-editing-quantity');
+         
       
       const qualityLabel=document.querySelector(`
       .js-quality-label-${productId}`);

@@ -30,41 +30,42 @@ cart.forEach((cartItem)=>{                   //Duplicating or normalizing of our
                   ${matchingProduct.name}
                 </div>
                 <div class="product-price">
-                  $${formatCurrency(matchingProduct.priceCents)}
-                </div>
-                <div class="product-quantity">
-                  <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
-                  </span>
-                  <span class="update-quantity-link link-primary
-                   js-update-link"
-                   data-product-id="${matchingProduct.id}">
-                    Update 
-                    <input class="quantity-input">
-                    <span class="save-quantity-link link-primary">Save</span>
-                  </span>
-                  <span class="delete-quantity-link link-primary js-delete-link"
-                  data-product-id="${matchingProduct.id}">
-                    Delete
-                  </span>
-                </div>
+                $${formatCurrency(matchingProduct.priceCents)}
               </div>
-
-              <div class="delivery-options">
-                <div class="delivery-options-title">
-                  Choose a delivery option:
-                </div>
-
-                <div class="delivery-option">
-                  <input type="radio" class="delivery-option-input"
-                    name="delivery-option-${matchingProduct.id}">
-                  <div>
-                    <div class="delivery-option-date">
-                      Tuesday, June 21
-                    </div>
-                    <div class="delivery-option-price">
-                      FREE Shipping
-                    </div>
+              <div class="product-quantity">
+                <span>
+                  Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                </span>
+                <span class="update-quantity-link link-primary js-update-link"
+                  data-product-id="${matchingProduct.id}">
+                  Update
+                </span>
+                <input class="quantity-input">
+                
+                <span class="save-quantity-link link-primary js-save-link"
+                  data-product-id="${matchingProduct.id}">
+                  Save
+                </span>
+                <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
+                  Delete
+                </span>
+              </div>
+            </div>
+            <div class="delivery-options">
+              <div class="delivery-options-title">
+                Choose a delivery option:
+              </div>
+              <div class="delivery-option">
+                <input type="radio" checked
+                  class="delivery-option-input"
+                  name="delivery-option-${matchingProduct.id}">
+                <div>
+                  <div class="delivery-option-date">
+                    Tuesday, June 21
+                  </div>
+                  <div class="delivery-option-price">
+                    FREE Shipping
+                  </div>
                   </div>
                 </div>
                 <div class="delivery-option">
@@ -124,14 +125,31 @@ document.querySelector('.js-return-to-home-link')
 updateCartQuantity();
 
 document.querySelectorAll('.js-update-link')
-.forEach((link)=>{
-  link.addEventListener('click',()=>{
-    const productId=link.dataset.productId;
-
-    const container=document.querySelector
-    (`.js-cart-item-container-${productId}`);
-    container.classList.add('is-editing-quantity')
+  .forEach((link) => {
+    link.addEventListener('click', () => {
+      const productId = link.dataset.productId;
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`             //see the css in checkout.css ...line 218 to 228
+      );                                                  //here used  .js-cart-item-container-${productId}`
+      container.classList.add('is-editing-quantity');     // because through this we can give to both
+    });
   });
-})
+
+  document.querySelectorAll('.js-save-link')
+  .forEach((link) => {
+    link.addEventListener('click', () => {
+      const productId = link.dataset.productId;
+
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`
+      );
+      container.classList.remove('is-editing-quantity');
+      const quantityInput = document.querySelector(
+        `.js-quantity-input-${productId}`
+      );
+      const newQuantity = Number(quantityInput.value);
+    });
+  });
 
 
+  

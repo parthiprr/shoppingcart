@@ -104,17 +104,20 @@ document.querySelectorAll('.js-delete-link') //selecting all delete links
     const container=document.querySelector
     (`.js-cart-item-container-${productId}`);     //use the deleet product id to delete
     container.remove();
+    updateCartQuantity();
 
    })
 });
 
 });
 
-let cartQuantity=0;
-
+function updateCartQuantity(){
+  let cartQuantity=0;                     //here we update the cart quantity in checkout
 cart.forEach((cartItem)=>{
   cartQuantity+=cartItem.quantity;
 });
-
 document.querySelector('.js-return-to-home-link')
-.innerHTML= cartQuantity;
+.innerHTML= `${cartQuantity} items`;
+
+}
+updateCartQuantity();

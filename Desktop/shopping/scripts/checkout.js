@@ -36,8 +36,12 @@ cart.forEach((cartItem)=>{                   //Duplicating or normalizing of our
                   <span>
                     Quantity: <span class="quantity-label">${cartItem.quantity}</span>
                   </span>
-                  <span class="update-quantity-link link-primary">
-                    Update
+                  <span class="update-quantity-link link-primary
+                   js-update-link"
+                   data-product-id="${matchingProduct.id}">
+                    Update 
+                    <input class="quantity-input">
+                    <span class="save-quantity-link link-primary">Save</span>
                   </span>
                   <span class="delete-quantity-link link-primary js-delete-link"
                   data-product-id="${matchingProduct.id}">
@@ -118,3 +122,16 @@ document.querySelector('.js-return-to-home-link')
 
 }
 updateCartQuantity();
+
+document.querySelectorAll('.js-update-link')
+.forEach((link)=>{
+  link.addEventListener('click',()=>{
+    const productId=link.dataset.productId;
+
+    const container=document.querySelector
+    (`.js-cart-item-container-${productId}`);
+    container.classList.add('is-editing-quantity')
+  });
+})
+
+

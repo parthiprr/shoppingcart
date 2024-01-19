@@ -4,6 +4,8 @@ import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryOption } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
+import {renderCheckoutHeader} from './checkoutHeader.js';
+
 
 
 
@@ -90,6 +92,8 @@ document.querySelectorAll('.js-delete-link') //selecting all delete links
    {
     const productId=link.dataset.productId;       //we are getting the productid using data attribute
     removeFromCart(productId);                     //takes the id to delete to cart
+    
+    renderCheckoutHeader();
     renderOrderSummary();
     
     renderPaymentSummary();
@@ -137,14 +141,15 @@ data-delivery-option-id="${deliveryOption.id}"
   return html;
     
 }
-
+/*
 function updateCartQuantity(){
-  const cartQuantity=calculateCartQuantity();
+  const cartQuantity=calculateCartQuantity();     //updating checkout quantity using DOM
 document.querySelector('.js-return-to-home-link')
 .innerHTML= `${cartQuantity} items`;
 
 }
 updateCartQuantity();
+*/
 
 document.querySelectorAll('.js-update-link')
   .forEach((link) => {

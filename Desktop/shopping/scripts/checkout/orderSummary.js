@@ -93,8 +93,8 @@ document.querySelectorAll('.js-delete-link') //selecting all delete links
     const productId=link.dataset.productId;       //we are getting the productid using data attribute
     removeFromCart(productId);                     //takes the id to delete to cart
     
-    renderCheckoutHeader();
-    renderOrderSummary();
+    renderCheckoutHeader();                   //should be called before  renderOrderSummary(); renderPaymentSummary();
+    renderOrderSummary();                     //becasue it will conflict and website will break
     
     renderPaymentSummary();
 

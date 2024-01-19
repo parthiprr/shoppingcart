@@ -34,10 +34,10 @@ export function addToCart(productId){
     } else {
       cart.push({
         productId,
-        quantity:1,
+        quantity,
         deliveryOptionId:'1'
       });
-      console.log(matchingItem);//
+      
     }
     saveToStorage();
 

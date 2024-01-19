@@ -5,6 +5,8 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryOption } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 
+
+
 export function renderOrderSummary(){
 
 
@@ -74,6 +76,10 @@ cart.forEach((cartItem)=>{                   //Duplicating or normalizing of our
   `;
 
 
+
+
+});
+
   
 document.querySelector('.js-order-summary') 
 .innerHTML=cartSummaryHTML;
@@ -84,15 +90,11 @@ document.querySelectorAll('.js-delete-link') //selecting all delete links
    {
     const productId=link.dataset.productId;       //we are getting the productid using data attribute
     removeFromCart(productId);                     //takes the id to delete to cart
-    const container=document.querySelector
-    (`.js-cart-item-container-${productId}`);     //use the deleet product id to delete
-    container.remove();
-    updateCartQuantity();
+    renderOrderSummary();
+    
     renderPaymentSummary();
 
    })
-});
-
 });
 
 function deliveryOptionsHTML(matchingProduct,cartItem){

@@ -174,6 +174,7 @@ document.querySelectorAll('.js-update-link')
       }
       
       updateQuantity(productId, newQuantity);  
+      renderOrderSummary();
 
       const container = document.querySelector(
         `.js-cart-item-container-${productId}`
